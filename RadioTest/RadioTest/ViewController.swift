@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -24,6 +25,18 @@ class ViewController: UIViewController {
         fm.setTitle("Selected", for: .normal)
         playRadio()
         
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            print("AVAudioSession Category Playback OK")
+            do {
+                try AVAudioSession.sharedInstance().setActive(true)
+                print("AVAudioSession is Active")
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
     }
 
     override func didReceiveMemoryWarning() {
