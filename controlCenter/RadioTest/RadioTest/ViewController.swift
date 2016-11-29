@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         //MARK: UI Setup
         self.view.backgroundColor = UIColor.black
         
+
         UIView.animate(withDuration: 0.0) {
             self.fmIcon.frame = CGRect(x: (self.view.frame.midX) - 100, y: self.screenSize.midY - 150, width: self.bigSizeIcon, height: self.bigSizeIcon)
             
@@ -49,7 +50,6 @@ class ViewController: UIViewController {
             self.fm.frame.origin.x = (self.view.frame.midX) - (self.fm.frame.size.width / 2)
             self.fm.frame.origin.y = self.fmIcon.layer.frame.origin.y + self.fmIcon.layer.frame.width + 10
         }
-        
         playRadio()
         
         
@@ -152,7 +152,6 @@ class ViewController: UIViewController {
         if RadioPlayer.sharedInstance.currentlyPlaying() {
             playRadio()
         }
-        
         updateMediaProperty(channel: RadioPlayer.sharedInstance.getChannel())
     }
     
@@ -175,7 +174,6 @@ class ViewController: UIViewController {
         if RadioPlayer.sharedInstance.currentlyPlaying() {
             playRadio()
         }
-        
         updateMediaProperty(channel: RadioPlayer.sharedInstance.getChannel())
     }
     
