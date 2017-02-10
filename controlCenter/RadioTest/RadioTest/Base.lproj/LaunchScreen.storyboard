@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,18 +21,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="OYe-sr-0bo">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchImage" translatesAutoresizingMaskIntoConstraints="NO" id="ekR-Us-njH">
+                                <rect key="frame" x="162" y="287" width="51" height="93"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="OYe-sr-0bo" secondAttribute="height" multiplier="375:667" id="c5u-dF-AeM"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="51" id="5Wx-wj-zfj"/>
+                                    <constraint firstAttribute="width" secondItem="ekR-Us-njH" secondAttribute="height" multiplier="45:83" id="JCf-qd-gqO"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WMUC" translatesAutoresizingMaskIntoConstraints="NO" id="Tnk-cj-Zlb">
+                                <rect key="frame" x="134" y="241" width="107" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="107" id="42e-OC-9e6"/>
+                                    <constraint firstAttribute="width" secondItem="Tnk-cj-Zlb" secondAttribute="height" multiplier="107:20" id="fD3-OC-RVI"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="OYe-sr-0bo" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="2L2-c3-gS4"/>
-                            <constraint firstItem="OYe-sr-0bo" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="RF7-2c-Kga"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="OYe-sr-0bo" secondAttribute="bottom" id="nkM-i2-J0V"/>
-                            <constraint firstAttribute="trailing" secondItem="OYe-sr-0bo" secondAttribute="trailing" id="oig-wX-VWi"/>
+                            <constraint firstItem="ekR-Us-njH" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="G1V-nB-f3E"/>
+                            <constraint firstItem="ekR-Us-njH" firstAttribute="top" secondItem="Tnk-cj-Zlb" secondAttribute="bottom" constant="26" id="Mva-Uh-dlf"/>
+                            <constraint firstItem="ekR-Us-njH" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="WtT-xu-nhp"/>
+                            <constraint firstItem="Tnk-cj-Zlb" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="pSl-ih-94D"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -40,6 +51,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchScreen" width="898" height="1436"/>
+        <image name="WMUC" width="321" height="63"/>
+        <image name="launchImage" width="270" height="498"/>
     </resources>
 </document>

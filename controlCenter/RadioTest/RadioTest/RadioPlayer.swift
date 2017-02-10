@@ -18,7 +18,7 @@ class RadioPlayer {
     var digital = AVPlayer(url: NSURL(string: "http://wmuc.umd.edu/wmuc2-high.m3u")! as URL)
     var fm = AVPlayer(url: NSURL(string: "http://wmuc.umd.edu/wmuc-high.m3u")! as URL)
     
-    private var currentChannel = "FM"
+    private var currentChannel = "none"
     private var isPlaying = false
     
     func play() {
@@ -50,11 +50,16 @@ class RadioPlayer {
     
     func changePlaying(channel : String) {
         if(channel == "FM") {
+            
             currentChannel = "FM"
+            
         }
         
         else {
             currentChannel = "Digital"
+        }
+        if(isPlaying==true){
+            play()
         }
     }
     
