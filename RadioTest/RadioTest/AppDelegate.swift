@@ -14,14 +14,13 @@ import AVFoundation
 let schedge = WMUCCrawler()
 var reachability = Reachability()!
 
-
 var viewerSetting = "FM"
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    
     
     // Headphone controls
     override func remoteControlReceived(with event: UIEvent?) {
@@ -49,14 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     
-    func  applicationDidFinishLaunching(_ application: UIApplication) {
-        
-        
-        
-        
+    func applicationDidFinishLaunching(_ application: UIApplication) {
         do{
             try reachability.startNotifier()
-        }catch{
+        } catch{
             print("could not start reachability notifier")
         }
 
@@ -64,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        
+        print("Test")
         schedge.fetchShows()
         
         return true
@@ -82,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        print(RadioPlayer.sharedInstance.currentlyPlaying())
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -94,13 +89,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if RadioPlayer.sharedInstance.digital.rate + RadioPlayer.sharedInstance.fm.rate == 0 {
             root.pauseRadio()
-            
-            
-                    }
+        }
+        
         if (reachability.isReachable){
             print("IT'S REACHABLE")
             
-            if ( schedge.digSched[0][0].name == "Unable to load Schedule"){
+            if (schedge.digSched[0][0].name == "Unable to load Schedule"){
                 schedge.fetchShows() //load and parse the schedule
             }
         }
@@ -126,24 +120,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             completionHandler(true)
         }
-        
+
         completionHandler(false)
     }
     
-    func reachabilityChanged(note: NSNotification) {
+    @objc func reachabilityChanged(note: NSNotification) {
         
-        
-
-        
-        print(" CHANGE")
         let thisreachability = note.object as! Reachability
-        
-        
         
         if (thisreachability.isReachable) {
             
-            if ( schedge.digSched[0][0].name == "Unable to load Schedule"){
-                
+            if (schedge.digSched[0][0].name == "Unable to load Schedule"){
                 schedge.fetchShows()
                 print("REFETCHING SHOWS, RECONNECTED")
             }
@@ -153,15 +140,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 print("Reachable via Cellular")
             }
-        } else {
-            
         }
         
         reachability = Reachability()!
         
         do{
             try reachability.startNotifier()
-        }catch{
+        } catch {
             print("could not start reachability notifier")
         }
     }

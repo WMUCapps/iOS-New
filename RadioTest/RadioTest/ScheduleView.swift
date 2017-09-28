@@ -51,8 +51,6 @@ class ScheduleView: UIViewController {
         day = Int(Calendar.current.component(.weekday, from: Date())) - 1
         
         self.daysel.selectedSegmentIndex = day
-        
-        
         self.DayLabel.text=daysArray[self.daysel.selectedSegmentIndex]
         
         let dayValue: [AnyHashable: Any] = [AnyHashable("dayVal"): day]
@@ -76,15 +74,10 @@ class ScheduleView: UIViewController {
     
 
     @IBOutlet weak var daysel: UISegmentedControl!
-    
     @IBOutlet weak var dotLeading: NSLayoutConstraint!
-    
     @IBOutlet weak var DayLabel: UILabel!
-    
     @IBOutlet weak var dot: UIImageView!
-  
     @IBOutlet weak var FMselect: UIButton!
-    
     @IBOutlet weak var Digselect: UIButton!
     
     @IBAction func FMselected(_ sender: Any) {
@@ -101,7 +94,6 @@ class ScheduleView: UIViewController {
 
          NotificationCenter.default.post(name: Notification.Name(rawValue: ChannelNotificationKey), object: self)
     }
-    
 
     @IBAction func digsel(_ sender: Any) {
         viewerSetting = "Dig"
@@ -148,7 +140,7 @@ class ScheduleView: UIViewController {
     }
     
     
-    func reachabilityChanged(note: NSNotification) {
+    @objc func reachabilityChanged(note: NSNotification) {
         print(" CHANGE")
 
         let thisreachability = note.object as! Reachability
@@ -181,8 +173,6 @@ class ScheduleView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
     }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

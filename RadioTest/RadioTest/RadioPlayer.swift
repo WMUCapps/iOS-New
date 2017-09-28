@@ -23,22 +23,18 @@ class RadioPlayer {
     private var isPlaying = false
     
     init(){
-    
-        
-    NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
-    
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
     }
     
     func play() {
         if currentChannel == "FM" {
             digital.pause()
             fm.play()
-        }
-        
-        else {
+        } else {
             fm.pause()
             digital.play()
         }
+        
         isPlaying = true
     }
     
@@ -47,7 +43,7 @@ class RadioPlayer {
         fm.pause()
         isPlaying = false
     }
-
+    
     func currentlyPlaying() -> Bool {
         return isPlaying
     }
@@ -57,16 +53,9 @@ class RadioPlayer {
     }
     
     func changePlaying(channel : String) {
-        if(channel == "FM") {
-            
-            currentChannel = "FM"
-            
-        }
+        currentChannel = channel == "FM" ? "FM" : "Digital"
         
-        else {
-            currentChannel = "Digital"
-        }
-        if(isPlaying==true){
+        if isPlaying {
             play()
         }
     }
@@ -75,11 +64,11 @@ class RadioPlayer {
         pause()
         digital = AVPlayer(url: NSURL(string: "http://wmuc.umd.edu/wmuc2-high.m3u")! as URL)
         fm = AVPlayer(url: NSURL(string: "http://wmuc.umd.edu/wmuc-high.m3u")! as URL)
-        if(isPlaying==true){
+        if isPlaying {
             play()
         }
     }
-
+    
     
     @objc func reachabilityChanged(note: NSNotification) {
         print(" CHANGE")
@@ -95,8 +84,8 @@ class RadioPlayer {
         } else {
             print("not reachable!")
             self.refresh()
-          
+            
         }
     }
-
+    
 }

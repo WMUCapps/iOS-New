@@ -1,12 +1,12 @@
 PODS:
-  - SwiftSoup (1.4.2)
+  - SwiftSoup (1.5.0)
 
 DEPENDENCIES:
   - SwiftSoup
 
 SPEC CHECKSUMS:
-  SwiftSoup: 9638363718859b469c3d7877b2b6a640348bacb7
+  SwiftSoup: fe7497488ebd557d5cebaa9797bb430fa4623446
 
 PODFILE CHECKSUM: 3a770009cb6e3fd5b4d257a41b1fabeb7f530aaa
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.3.0.beta.2

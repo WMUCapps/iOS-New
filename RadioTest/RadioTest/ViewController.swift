@@ -64,8 +64,6 @@ class ViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         self.ShowName.text = ""
         self.DJNames.text = ""
-    
-        //playRadio()
         
         
         do {
@@ -75,10 +73,10 @@ class ViewController: UIViewController {
                 try AVAudioSession.sharedInstance().setActive(true)
                 print("AVAudioSession is Active")
             } catch let error as NSError {
-                print(error.localizedDescription)
+                //                print(error.localizedDescription)
             }
         } catch let error as NSError {
-            print(error.localizedDescription)
+            //            print(error.localizedDescription)
         }
         
         //MARK: Observers
@@ -116,21 +114,21 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if (FirstLaunch){
-          if(reachability.isReachable == false){
-            
-          let alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to the internet, so the app might not work as expected. Check your connectivity settings and come back 😊", preferredStyle: .alert)
-        
-          alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-              print("OK")
-          })
-        
-          self.present(alert, animated: true)
-          }
+            if(reachability.isReachable == false){
+                
+                let alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to the internet, so the app might not work as expected. Check your connectivity settings and come back 😊", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                    print("OK")
+                })
+                
+                self.present(alert, animated: true)
+            }
         }
         
         FirstLaunch = false
     }
-        
+    
     override func viewWillAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
         do{
@@ -141,32 +139,33 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        print("did layout subviews")
-        print(RadioPlayer.sharedInstance.getChannel())
+        //        print("did layout subviews")
+        //        print(RadioPlayer.sharedInstance.getChannel())
+        
         //self.FMIconHeight.constant = 160
-        
         //self.FMIconWidth.constant = 160
-        
         //self.FMIconLeading.constant = 100
-                    self.view.layoutIfNeeded()
+        
+        self.view.layoutIfNeeded()
+        
         if flag {
-
-                    if(RadioPlayer.sharedInstance.getChannel()=="FM"){
-        
-                        self.fmIcon.frame = CGRect(x: (self.view.frame.midX - (self.bigSizeIcon/(2*1.19))), y: self.screenSize.midY - 150, width: (self.bigSizeIcon/1.19), height: self.bigSizeIcon)
-                        self.digitalButton.frame = CGRect(x: (self.screenSize.maxX - 38 - self.smallSizeIcon), y: self.screenSize.midY - (self.smallSizeIcon), width: self.smallSizeIcon, height: self.smallSizeIcon)
-        
-                    }else{
-        
-                        self.fmIcon.frame = CGRect(x: (self.screenSize.minX + 38), y: self.screenSize.midY - (self.smallSizeIcon), width: (self.smallSizeIcon/1.19), height: self.smallSizeIcon)
-                        self.digitalButton.frame = CGRect(x: (self.view.frame.midX - (self.bigSizeIcon/2)), y: self.screenSize.midY - 150, width: self.bigSizeIcon, height: self.bigSizeIcon)
-                    }
+            
+            if(RadioPlayer.sharedInstance.getChannel()=="FM"){
                 
+                self.fmIcon.frame = CGRect(x: (self.view.frame.midX - (self.bigSizeIcon/(2*1.19))), y: self.screenSize.midY - 150, width: (self.bigSizeIcon/1.19), height: self.bigSizeIcon)
+                self.digitalButton.frame = CGRect(x: (self.screenSize.maxX - 38 - self.smallSizeIcon), y: self.screenSize.midY - (self.smallSizeIcon), width: self.smallSizeIcon, height: self.smallSizeIcon)
                 
+            } else{
+                
+                self.fmIcon.frame = CGRect(x: (self.screenSize.minX + 38), y: self.screenSize.midY - (self.smallSizeIcon), width: (self.smallSizeIcon/1.19), height: self.smallSizeIcon)
+                self.digitalButton.frame = CGRect(x: (self.view.frame.midX - (self.bigSizeIcon/2)), y: self.screenSize.midY - 150, width: self.bigSizeIcon, height: self.bigSizeIcon)
+            }
+            
+            
         }
     }
-
-
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -187,7 +186,7 @@ class ViewController: UIViewController {
         
     }
     
-    func playRadio() {
+    @objc func playRadio() {
         
         if !RadioPlayer.sharedInstance.currentlyPlaying() {
             RadioPlayer.sharedInstance.refresh()
@@ -198,7 +197,7 @@ class ViewController: UIViewController {
         
     }
     
-    func pauseRadio() {
+    @objc func pauseRadio() {
         RadioPlayer.sharedInstance.pause()
         RadioPlayer.sharedInstance.refresh()
         playButton.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
@@ -215,20 +214,14 @@ class ViewController: UIViewController {
         RadioPlayer.sharedInstance.changePlaying(channel: "FM")
         
         hour = Int(Calendar.current.component(.hour, from: Date()))
-        
         today = Int(Calendar.current.component(.weekday, from: Date())) - 1
         
         if (schedge.digSched[0][0].name != "Unable to load Schedule"){
-        let indexfiltered = schedge.fmSched[today].filter{ $0.time <= hour && ($0.time + ($0.len/2) - 1) >= hour }
-        
-        if indexfiltered.isEmpty{
-            self.ShowName.text = ""
-            self.DJNames.text = ""
+            let indexfiltered = schedge.fmSched[today].filter{ $0.time <= hour && ($0.time + ($0.len/2) - 1) >= hour }
             
-        }else {
-            self.ShowName.text=indexfiltered[0].name
-            self.DJNames.text=indexfiltered[0].dj
-        }
+            self.ShowName.text = indexfiltered.isEmpty ? "" : indexfiltered[0].name
+            self.DJNames.text = indexfiltered.isEmpty ? "" : indexfiltered[0].dj
+            
         }
         
         updateMediaProperty(channel: RadioPlayer.sharedInstance.getChannel())
@@ -248,15 +241,11 @@ class ViewController: UIViewController {
         hour = Int(Calendar.current.component(.hour, from: Date()))
         today = Int(Calendar.current.component(.weekday, from: Date())) - 1
         if (schedge.digSched.count >= 7){
-        let index = schedge.digSched[today].filter{ $0.time <= hour && ($0.time + ($0.len/2) - 1 ) >= hour }
-        
-        if index.isEmpty{
-            self.ShowName.text = " "
-            self.DJNames.text = " "
-        }else {
-            self.ShowName.text=index[0].name
-            self.DJNames.text=index[0].dj
-        }
+            let index = schedge.digSched[today].filter{ $0.time <= hour && ($0.time + ($0.len/2) - 1 ) >= hour }
+
+            self.ShowName.text = index.isEmpty ? "" : index[0].name
+            self.DJNames.text = index.isEmpty ? "" : index[0].dj
+            
         }
     }
     
@@ -287,7 +276,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func nextChannel() {
+    @objc func nextChannel() {
         if RadioPlayer.sharedInstance.getChannel() == "FM" {
             digitalIconPressed(nil)
             
@@ -305,7 +294,7 @@ class ViewController: UIViewController {
     }
     
     
-    func handleInterruption(notification: NSNotification) {
+    @objc func handleInterruption(notification: NSNotification) {
         
         if notification.name != NSNotification.Name.AVAudioSessionInterruption || notification.userInfo == nil{
             return
@@ -324,7 +313,7 @@ class ViewController: UIViewController {
                 print("audio paused")
                 
             case .ended:
-            
+                
                 print("ended")
                 playRadio()
                 print("audio resumed")
@@ -348,11 +337,7 @@ class ViewController: UIViewController {
         
     }
     
- 
-    
-    
-    
-    dynamic private func audioRouteChangeListener(notification:NSNotification) {
+    @objc dynamic private func audioRouteChangeListener(notification:NSNotification) {
         let audioRouteChangeReason = notification.userInfo![AVAudioSessionRouteChangeReasonKey] as! UInt
         
         switch audioRouteChangeReason {
@@ -365,19 +350,19 @@ class ViewController: UIViewController {
         }
     }
     
-    func reachabilityChanged(note: NSNotification) {
+    @objc func reachabilityChanged(note: NSNotification) {
         print(" CHANGE")
         
-
+        
         let thisreachability = note.object as! Reachability
-    
+        
         if thisreachability.isReachable {
             
-        if thisreachability.isReachableViaWiFi {
-        print("Reachable via WiFi")
-        } else {
-        print("Reachable via Cellular")
-        }
+            if thisreachability.isReachableViaWiFi {
+                print("Reachable via WiFi")
+            } else {
+                print("Reachable via Cellular")
+            }
         } else {
             let alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to the internet, so you won't be able to stream WMUC. Check your connectivity settings and come back 😊", preferredStyle: .alert)
             
@@ -386,63 +371,42 @@ class ViewController: UIViewController {
             
             self.present(alert, animated: true)
         }
-        do{
+        do {
             try reachability.startNotifier()
-        }catch{
+        } catch {
             print("could not start reachability notifier")
         }
-
+        
     }
     
     @IBAction func backToPlayer(segue: UIStoryboardSegue) {}
     
     
-    func CurrentShow(channel: String) -> [String]{
+    func CurrentShow(channel: String) -> [String] {
         
         var show = ""
         var dj = ""
         
         hour = Int(Calendar.current.component(.hour, from: Date()))
-        
         today = Int(Calendar.current.component(.weekday, from: Date())) - 1
         
-        if (schedge.digSched[0][0].name != "Unable to load Schedule"){
+        if (schedge.digSched[0][0].name != "Unable to load Schedule") {
+            
+            var indexfiltered = [Show]()
             if channel == "FM" {
-                let indexfiltered = schedge.fmSched[today].filter{ $0.time <= hour && ($0.time + ($0.len/2) - 1) >= hour }
+                indexfiltered = schedge.fmSched[today].filter{ $0.time <= hour && ($0.time + ($0.len/2) - 1) >= hour }
+            }
                 
-                if indexfiltered.isEmpty{
-                    show = ""
-                    dj = ""
-                    
-                }else {
-                    show = indexfiltered[0].name
-                    dj = indexfiltered[0].dj
-                }
-
-                
-            }else{
-                let indexfiltered = schedge.digSched[today].filter{ $0.time <= hour && ($0.time + ($0.len/2) - 1) >= hour }
-                
-                if indexfiltered.isEmpty{
-                    show = ""
-                    dj = ""
-                    
-                }else {
-                    show = indexfiltered[0].name
-                    dj = indexfiltered[0].dj
-                }
-        }
+            else {
+                indexfiltered = schedge.digSched[today].filter{ $0.time <= hour && ($0.time + ($0.len/2) - 1) >= hour }
+            }
+            
+            show = indexfiltered.isEmpty ? "" : indexfiltered[0].name
+            dj = indexfiltered.isEmpty ? "" : indexfiltered[0].dj
             
         }
         return [show, dj]
     }
     
-    
-//    dynamic private func AVPlayerStatusListener(notification:NSNotification) {
-//        let audioRouteChangeReason = notification.userInfo![AVAudioSessionRouteChangeReasonKey] as! UInt
-//        
-//        
-//        
-//    }
 }
 
