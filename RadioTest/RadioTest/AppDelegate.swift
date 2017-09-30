@@ -111,6 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    @available(iOS 9.0, *)
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         let root : ViewController = self.window!.rootViewController! as! ViewController
         if shortcutItem.type == "FM Radio" {
@@ -130,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler(false)
     }
     
-    func reachabilityChanged(note: NSNotification) {
+    @objc func reachabilityChanged(note: NSNotification) {
         
         
 

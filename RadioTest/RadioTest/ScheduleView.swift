@@ -14,8 +14,8 @@ let ChannelNotificationKey = "Channel"
 
 class ScheduleView: UIViewController {
     
-    let daysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-    var day = Int(Calendar.current.component(.weekday, from: Date())) - 1
+    @objc let daysArray = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    @objc var day = Int(Calendar.current.component(.weekday, from: Date())) - 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,7 +148,7 @@ class ScheduleView: UIViewController {
     }
     
     
-    func reachabilityChanged(note: NSNotification) {
+    @objc func reachabilityChanged(note: NSNotification) {
         print(" CHANGE")
 
         let thisreachability = note.object as! Reachability

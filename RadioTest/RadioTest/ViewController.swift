@@ -15,9 +15,9 @@ var FirstLaunch = true;
 
 class ViewController: UIViewController {
     
-    var flag = false
-    var today = 0;
-    var hour = 0;
+    @objc var flag = false
+    @objc var today = 0;
+    @objc var hour = 0;
     
     
     
@@ -35,8 +35,8 @@ class ViewController: UIViewController {
     
     
     //MARK: UIImages
-    var fmImage : UIImage = UIImage(named: "AlbumArtFM")!
-    var digitalImage : UIImage = UIImage(named: "AlbumArtDigital")!
+    @objc var fmImage : UIImage = UIImage(named: "AlbumArtFM")!
+    @objc var digitalImage : UIImage = UIImage(named: "AlbumArtDigital")!
     
     
     //Mark: Labels
@@ -45,11 +45,11 @@ class ViewController: UIViewController {
     
     
     //MARK: Size Properties
-    let screenSize: CGRect = UIScreen.main.bounds
-    let smallSizeIcon : CGFloat = 80
-    let bigSizeIcon : CGFloat = 150
+    @objc let screenSize: CGRect = UIScreen.main.bounds
+    @objc let smallSizeIcon : CGFloat = 80
+    @objc let bigSizeIcon : CGFloat = 150
     
-    var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
+    @objc var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskInvalid
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -187,7 +187,7 @@ class ViewController: UIViewController {
         
     }
     
-    func playRadio() {
+    @objc func playRadio() {
         
         if !RadioPlayer.sharedInstance.currentlyPlaying() {
             RadioPlayer.sharedInstance.refresh()
@@ -198,7 +198,7 @@ class ViewController: UIViewController {
         
     }
     
-    func pauseRadio() {
+    @objc func pauseRadio() {
         RadioPlayer.sharedInstance.pause()
         RadioPlayer.sharedInstance.refresh()
         playButton.setImage(#imageLiteral(resourceName: "Play"), for: .normal)
@@ -263,7 +263,7 @@ class ViewController: UIViewController {
     
     //MARK TOGGLE ANIMATIONS
     
-    func toggleAnimation(channel : String){
+    @objc func toggleAnimation(channel : String){
         if channel == "Digital" {
             if RadioPlayer.sharedInstance.getChannel() != "Digital" {
                 //perform animation
@@ -287,7 +287,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func nextChannel() {
+    @objc func nextChannel() {
         if RadioPlayer.sharedInstance.getChannel() == "FM" {
             digitalIconPressed(nil)
             
@@ -298,14 +298,14 @@ class ViewController: UIViewController {
         
     }
     
-    func updateMediaProperty(channel : String) {
+    @objc func updateMediaProperty(channel : String) {
         let artwork = (channel == "FM") ? MPMediaItemArtwork(image: fmImage) : MPMediaItemArtwork(image: digitalImage)
         
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyTitle : CurrentShow(channel: RadioPlayer.sharedInstance.getChannel())[0], MPMediaItemPropertyArtist : CurrentShow(channel: RadioPlayer.sharedInstance.getChannel())[1], MPMediaItemPropertyArtwork : artwork]
     }
     
     
-    func handleInterruption(notification: NSNotification) {
+    @objc func handleInterruption(notification: NSNotification) {
         
         if notification.name != NSNotification.Name.AVAudioSessionInterruption || notification.userInfo == nil{
             return
@@ -352,7 +352,7 @@ class ViewController: UIViewController {
     
     
     
-    dynamic private func audioRouteChangeListener(notification:NSNotification) {
+    @objc dynamic private func audioRouteChangeListener(notification:NSNotification) {
         let audioRouteChangeReason = notification.userInfo![AVAudioSessionRouteChangeReasonKey] as! UInt
         
         switch audioRouteChangeReason {
@@ -365,7 +365,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func reachabilityChanged(note: NSNotification) {
+    @objc func reachabilityChanged(note: NSNotification) {
         print(" CHANGE")
         
 
@@ -397,7 +397,7 @@ class ViewController: UIViewController {
     @IBAction func backToPlayer(segue: UIStoryboardSegue) {}
     
     
-    func CurrentShow(channel: String) -> [String]{
+    @objc func CurrentShow(channel: String) -> [String]{
         
         var show = ""
         var dj = ""

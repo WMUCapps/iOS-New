@@ -14,8 +14,8 @@ class ScheduleTableViewController: UITableViewController {
     
 
     var shows = [Show]()
-    var day = Int(Calendar.current.component(.weekdayOrdinal, from: Date()));
-    var isItToday = true;
+    @objc var day = Int(Calendar.current.component(.weekdayOrdinal, from: Date()));
+    @objc var isItToday = true;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,9 +118,9 @@ class ScheduleTableViewController: UITableViewController {
         print(thisshow.len);
         if (isItToday && (thisshow.time <= hour) && ((thisshow.time + (thisshow.len/2) - 1 ) >= hour)){
             print("SELECTED")
-            cell.backgroundColor = UIColor(colorLiteralRed: 0, green: 0, blue: 0, alpha: 0.2)
+            cell.backgroundColor = UIColor.lightGray
         }else{
-            cell.backgroundColor = UIColor(colorLiteralRed: 1, green: 1, blue: 1, alpha: 1)
+            cell.backgroundColor = UIColor.white
         }
         
         return cell
@@ -172,14 +172,14 @@ class ScheduleTableViewController: UITableViewController {
     }
     */
     
-     func updateChannel(){
+     @objc func updateChannel(){
         
         loadShows()
         
     }
     
     
-    func updateDay(_ notification:NSNotification){
+    @objc func updateDay(_ notification:NSNotification){
         
         if let dayVal = notification.userInfo?["dayVal"] as? Int {
             
