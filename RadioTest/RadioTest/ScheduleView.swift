@@ -36,12 +36,16 @@ class ScheduleView: UIViewController {
         FMselect.isSelected = (viewerSetting == "FM")
         
         if (FMselect.isSelected){
+            FMselect.isSelected = true
+            Digselect.isSelected = false
+            
             var dot = self.dot.frame
             dot.origin.x = self.FMselect.frame.midX - (0.5 * dot.width)
             self.dot.frame=dot
             self.dot.updateConstraints()
         } else {
             Digselect.isSelected = true
+            FMselect.isSelected = false
             var dot = self.dot.frame
             dot.origin.x = self.Digselect.frame.midX - (0.5 * dot.width)
             self.dot.frame=dot

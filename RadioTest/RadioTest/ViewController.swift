@@ -21,30 +21,32 @@ class ViewController: UIViewController {
     
     
     
-    //Mark: Constraints
+//Mark: Constraints
     @IBOutlet weak var FMIconHeight: NSLayoutConstraint!
     @IBOutlet weak var FMIconWidth: NSLayoutConstraint!
     @IBOutlet weak var FMIconLeading: NSLayoutConstraint!
     
     
-    //MARK: UIButtons
+//MARK: UIButtons
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var fmIcon: UIButton!
     @IBOutlet weak var digitalButton: UIButton!
+    @IBOutlet weak var callin: UIButton!
+    @IBOutlet weak var favorite: UIButton!
     
     
     
-    //MARK: UIImages
+//MARK: UIImages
     @objc var fmImage : UIImage = UIImage(named: "AlbumArtFM")!
     @objc var digitalImage : UIImage = UIImage(named: "AlbumArtDigital")!
     
     
-    //Mark: Labels
+//Mark: Labels
     @IBOutlet weak var ShowName: UILabel!
     @IBOutlet weak var DJNames: UILabel!
     
     
-    //MARK: Size Properties
+//MARK: Size Properties
     @objc let screenSize: CGRect = UIScreen.main.bounds
     @objc let smallSizeIcon : CGFloat = 80
     @objc let bigSizeIcon : CGFloat = 150
@@ -60,7 +62,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged),name: ReachabilityChangedNotification,object: reachability)
         
         
-        //MARK: UI Setup
+//MARK: UI Setup
         self.view.backgroundColor = UIColor.white
         self.ShowName.text = ""
         self.DJNames.text = ""
@@ -81,7 +83,8 @@ class ViewController: UIViewController {
             print(error.localizedDescription)
         }
         
-        //MARK: Observers
+//MARK: Observers
+        
         UIApplication.shared.beginReceivingRemoteControlEvents()
         
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.handleInterruption(notification:)), name: NSNotification.Name.AVAudioSessionInterruption, object: nil)
@@ -91,7 +94,8 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(audioRouteChangeListener), name: NSNotification.Name.AVAudioSessionRouteChange,
                                                object: nil)
         
-        // Control Center Functionality
+//MARK: Control Center Functionality
+        
         let commandCenter = MPRemoteCommandCenter.shared()
         commandCenter.playCommand.isEnabled = true
         commandCenter.pauseCommand.isEnabled = true
@@ -104,6 +108,7 @@ class ViewController: UIViewController {
         
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyTitle : CurrentShow(channel: RadioPlayer.sharedInstance.getChannel())[0], MPMediaItemPropertyArtist : CurrentShow(channel: RadioPlayer.sharedInstance.getChannel())[1], MPMediaItemPropertyArtwork : MPMediaItemArtwork(image: fmImage)]
         
+
         // Swipe Gesture Recognition
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.onSwipe(_:)))
         swipeRight.direction = UISwipeGestureRecognizerDirection.right
@@ -116,6 +121,9 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         if (FirstLaunch){
+            favorite.isHidden = true
+            callin.isHidden = true
+            
           if(reachability.isReachable == false){
             
           let alert = UIAlertController(title: "No Internet Connection", message: "You are not connected to the internet, so the app might not work as expected. Check your connectivity settings and come back 😊", preferredStyle: .alert)
@@ -172,7 +180,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: Play Pause Button Functionality
+//MARK: Play Pause Button Functionality
+    
     @IBAction func buttonPressed(_ sender: UIButton) {
         if flag {
             if RadioPlayer.sharedInstance.currentlyPlaying() {
@@ -184,6 +193,9 @@ class ViewController: UIViewController {
         }
         
         updateMediaProperty(channel: RadioPlayer.sharedInstance.getChannel())
+        
+    }
+    @IBAction func callinbutton(_ sender: Any) {
         
     }
     
@@ -240,8 +252,15 @@ class ViewController: UIViewController {
         flag = true
         viewerSetting = "Dig"
         
+        favorite.isHidden = false
+        callin.isHidden = false
+        
+        
+        
         toggleAnimation(channel: "Digital")
         RadioPlayer.sharedInstance.changePlaying(channel: "Digital")
+        
+        
         
         updateMediaProperty(channel: RadioPlayer.sharedInstance.getChannel())
         
