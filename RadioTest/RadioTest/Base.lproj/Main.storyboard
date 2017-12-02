@@ -118,6 +118,11 @@
                                     <constraint firstAttribute="width" constant="20" id="rjR-mE-j3R"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="NoFavorite"/>
+                                <state key="selected" image="Favorited"/>
+                                <state key="highlighted" image="Favorited"/>
+                                <connections>
+                                    <action selector="favorite:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fWr-Tg-xpp"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -322,7 +327,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="ShowTableViewCell" rowHeight="60" id="DZB-yg-1NP" customClass="ShowTableViewCell" customModule="RadioTest" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="ShowTableViewCell" rowHeight="60" id="DZB-yg-1NP" customClass="ShowTableViewCell" customModule="RadioTest" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="344" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DZB-yg-1NP" id="t9i-Qa-p3u">
@@ -347,11 +352,26 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdz-Xa-rDd">
+                                            <rect key="frame" x="316" y="20" width="20" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="20" id="DFd-rT-MzT"/>
+                                                <constraint firstAttribute="width" secondItem="rdz-Xa-rDd" secondAttribute="height" multiplier="20:21" id="T4E-iT-WhZ"/>
+                                            </constraints>
+                                            <state key="normal" title="Button" image="NoFavorite"/>
+                                            <state key="selected" image="Favorited"/>
+                                            <connections>
+                                                <action selector="favorite:" destination="DZB-yg-1NP" eventType="touchUpInside" id="5Zf-VY-Dcq"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="rdz-Xa-rDd" firstAttribute="centerY" secondItem="t9i-Qa-p3u" secondAttribute="centerY" id="28Q-fy-GGy"/>
                                         <constraint firstItem="ytF-ie-Uee" firstAttribute="centerX" secondItem="t9i-Qa-p3u" secondAttribute="centerX" id="5ps-Ua-HIR"/>
                                         <constraint firstItem="peF-4G-I5F" firstAttribute="leading" secondItem="t9i-Qa-p3u" secondAttribute="leadingMargin" id="Enf-XS-RUw"/>
                                         <constraint firstItem="K81-av-NQ8" firstAttribute="top" secondItem="t9i-Qa-p3u" secondAttribute="topMargin" id="Eyz-tv-fch"/>
+                                        <constraint firstItem="rdz-Xa-rDd" firstAttribute="width" secondItem="rdz-Xa-rDd" secondAttribute="height" multiplier="20:21" id="IIF-Xs-pir"/>
+                                        <constraint firstItem="rdz-Xa-rDd" firstAttribute="trailing" secondItem="ytF-ie-Uee" secondAttribute="trailing" id="a0I-5Q-abq"/>
                                         <constraint firstItem="K81-av-NQ8" firstAttribute="trailing" secondItem="t9i-Qa-p3u" secondAttribute="trailingMargin" constant="-44" id="bQ7-yq-MRT"/>
                                         <constraint firstItem="ytF-ie-Uee" firstAttribute="trailing" secondItem="t9i-Qa-p3u" secondAttribute="trailingMargin" id="dui-Sd-gVn"/>
                                         <constraint firstItem="ytF-ie-Uee" firstAttribute="leading" secondItem="t9i-Qa-p3u" secondAttribute="leadingMargin" id="eFj-pI-Uj6"/>
@@ -362,6 +382,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="fav" destination="rdz-Xa-rDd" id="EJM-cY-lSi"/>
                                     <outlet property="showDj" destination="ytF-ie-Uee" id="teA-il-R6C"/>
                                     <outlet property="showTime" destination="peF-4G-I5F" id="yfu-ai-nOC"/>
                                     <outlet property="showTitle" destination="K81-av-NQ8" id="2Xs-az-ro6"/>
@@ -380,6 +401,7 @@
         <image name="Call-in" width="210" height="210"/>
         <image name="Digital" width="333" height="345"/>
         <image name="FM" width="318" height="381"/>
+        <image name="Favorited" width="220" height="220"/>
         <image name="Group" width="216" height="306"/>
         <image name="NoFavorite" width="220" height="220"/>
         <image name="Schedule" width="90" height="72"/>

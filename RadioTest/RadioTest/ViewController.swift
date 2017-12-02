@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     @objc var flag = false
     @objc var today = 0;
     @objc var hour = 0;
-    
+    var fav = false;
     
     
 //Mark: Constraints
@@ -180,6 +180,12 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+//MARK: Favorite Button Functionality
+    @IBAction func favorite(_ sender: UIButton) {
+        favorite.isSelected=(!favorite.isSelected)
+    }
+    
 //MARK: Play Pause Button Functionality
     
     @IBAction func buttonPressed(_ sender: UIButton) {
@@ -223,6 +229,10 @@ class ViewController: UIViewController {
         flag = true
         viewerSetting = "FM"
         
+        favorite.isHidden = false
+        callin.isHidden = false
+        
+        
         toggleAnimation(channel: "FM")
         RadioPlayer.sharedInstance.changePlaying(channel: "FM")
         
@@ -240,6 +250,7 @@ class ViewController: UIViewController {
         }else {
             self.ShowName.text=indexfiltered[0].name
             self.DJNames.text=indexfiltered[0].dj
+            
         }
         }
         

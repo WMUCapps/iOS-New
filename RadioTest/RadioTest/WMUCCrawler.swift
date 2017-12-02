@@ -127,14 +127,14 @@ class WMUCCrawler {
                                     digSched[daytracker].append(Show(s: offAir)) // if it's off air, put a new off air show on
                                     let length = try n.attr("rowspan") // use the rowspan to get how many half-hour blocks the show takes up
                                     let len = Int(length)!;
-                                    digSched[daytracker].last?.setTime(t: timetracker, length: len) //set the show's time info
+                                    digSched[daytracker].last?.setTime(t: timetracker, length: Int16(len)) //set the show's time info
                                     colTrackdig.updateValue(len, forKey: daytracker) // update that we have a show in this column for the next (len) half hour blocks.
                                 } else if d {
                                     let NewShow = try n.text().components(separatedBy:"***") // get the various components: name *** dj *** etc
                                     digSched[daytracker].append(Show(s: NewShow)) // add the new show in
                                     let length = try n.attr("rowspan") // get in thew new length info
                                     let len = Int(length)!;
-                                    digSched[daytracker].last?.setTime(t: timetracker, length: len)// update that we have a show in this column for the next (len) half hour blocks.
+                                    digSched[daytracker].last?.setTime(t: timetracker, length: Int16(len))// update that we have a show in this column for the next (len) half hour blocks.
                                     colTrackdig.updateValue(len, forKey: daytracker)
                                 }
                                 
@@ -197,14 +197,14 @@ class WMUCCrawler {
                                     fmSched[daytracker].append(Show(s: offAir)) // if it's off air, put a new off air show on
                                     let length = try n.attr("rowspan") // use the rowspan to get how many half-hour blocks the show takes up
                                     let len = Int(length)!;
-                                    fmSched[daytracker].last?.setTime(t: timetracker, length: len) //set the show's time info
+                                    fmSched[daytracker].last?.setTime(t: timetracker, length: Int16(len)) //set the show's time info
                                     colTrackfm.updateValue(len, forKey: daytracker) // update that we have a show in this column for the next (len) half hour blocks.
                                 } else if d {
                                     let NewShow = try n.text().components(separatedBy:"***") // get the various components: name *** dj *** etc
                                     fmSched[daytracker].append(Show(s: NewShow)) // add the new show in
                                     let length = try n.attr("rowspan") // get in thew new length info
                                     let len = Int(length)!;
-                                    fmSched[daytracker].last?.setTime(t: timetracker, length: len)// update that we have a show in this column for the next (len) half hour blocks.
+                                    fmSched[daytracker].last?.setTime(t: timetracker, length: Int16(len))// update that we have a show in this column for the next (len) half hour blocks.
                                     colTrackfm.updateValue(len, forKey: daytracker)
                                 }
                                 

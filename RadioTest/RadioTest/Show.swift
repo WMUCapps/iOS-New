@@ -13,8 +13,8 @@ class Show{
     
     var name: String
     var dj: String
-    var time: Int
-    var len: Int
+    var time: Int16
+    var len: Int16
     //MARK: Initialization
     
     init(s: [String]) {
@@ -24,9 +24,9 @@ class Show{
         len = 1
     }
 
-    public func setTime(t: String, length: Int) {
+    public func setTime(t: String, length: Int16) {
         var semicolon = t.components(separatedBy: ":")
-        var hour = Int(semicolon[0])!
+        var hour = Int16(semicolon[0])!
         if (t.contains("PM") && hour<12){
             hour+=12
         }else if (t.contains("AM") && hour == 12){

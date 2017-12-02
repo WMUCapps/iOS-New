@@ -18,4 +18,10 @@ class ShowTableViewCell: UITableViewCell {
     
     @IBOutlet weak var endTime: UILabel!
     
+    @IBOutlet weak var fav: UIButton!
+    
+    //MARK: Favorite Button Functionality
+    @IBAction func favorite(_ sender: UIButton) {
+        fav.isSelected=(!fav.isSelected)
+    }
 }

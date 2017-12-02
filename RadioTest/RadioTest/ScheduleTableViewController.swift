@@ -25,7 +25,7 @@ class ScheduleTableViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ScheduleTableViewController.updateDay(_:)), name: NSNotification.Name(rawValue: DayNotificationKey), object: nil)
         
         
-        let hour = Int(Calendar.current.component(.hour, from: Date()))
+        let hour = Int16(Calendar.current.component(.hour, from: Date()))
         let today = Int(Calendar.current.component(.weekday, from: Date())) - 1
         
         if (schedge.digSched.count >= 7){
@@ -84,6 +84,7 @@ class ScheduleTableViewController: UITableViewController {
         }
         // Configure the cell...
         
+        
         let thisshow=shows[indexPath.row]
         
         if (thisshow.time > 12){
@@ -102,20 +103,20 @@ class ScheduleTableViewController: UITableViewController {
         
         let endTime = (thisshow.time + (thisshow.len/2))
         if (endTime > 12){
-            cell.endTime.text = String(endTime - 12) + ":00 PM"
+            //cell.endTime.text = String(endTime - 12) + ":00 PM"
         }else if (endTime == 0) {
-            cell.endTime.text = "12:00 AM"
+            //cell.endTime.text = "12:00 AM"
         }else if(endTime == 12){
-            cell.endTime.text = "12:00 PM"
+            //cell.endTime.text = "12:00 PM"
         }else{
-            cell.endTime.text = String(endTime) + ":00 AM"
+            //cell.endTime.text = String(endTime) + ":00 AM"
         }
 
         
-        let hour = Int(Calendar.current.component(.hour, from: Date()))
+        let hour = Int16(Calendar.current.component(.hour, from: Date()))
         print("___________________")
-        print(thisshow.time);
-        print(thisshow.len);
+        print(thisshow.time)
+        print(thisshow.len)
         if (isItToday && (thisshow.time <= hour) && ((thisshow.time + (thisshow.len/2) - 1 ) >= hour)){
             print("SELECTED")
             cell.backgroundColor = UIColor.lightGray
