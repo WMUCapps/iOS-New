@@ -15,6 +15,7 @@ class Show{
     var dj: String
     var time: Int
     var len: Int
+    var favorited: Bool
     //MARK: Initialization
     
     init(s: [String]) {

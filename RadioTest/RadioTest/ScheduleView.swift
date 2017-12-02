@@ -193,7 +193,6 @@ class ScheduleView: UIViewController {
         self.performSegue(withIdentifier: "backToPlayerWithSegue", sender: self)
     }
     
-    
     /*
     // MARK: - Navigation
 

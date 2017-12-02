@@ -7,13 +7,13 @@
 //
 
 import UIKit
-
+import CoreData
 
 
 class ScheduleTableViewController: UITableViewController {
     
 
-    var shows = [Show]()
+    var shows: [NSManagedObject] = []
     var day = Int(Calendar.current.component(.weekdayOrdinal, from: Date()));
     var isItToday = true;
     
@@ -63,17 +63,15 @@ class ScheduleTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return shows.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -96,7 +94,6 @@ class ScheduleTableViewController: UITableViewController {
             cell.showTime.text = String(thisshow.time) + ":00 AM"
         }
         
-        
         cell.showTitle.text = thisshow.name
         cell.showDj.text = thisshow.dj
         
@@ -110,7 +107,12 @@ class ScheduleTableViewController: UITableViewController {
         }else{
             cell.endTime.text = String(endTime) + ":00 AM"
         }
-
+        
+        if (thisshow.favorited) {
+            // Set favorited in cell as "selected"
+        } else {
+            // Set favorited in cell as "NOT selected"
+        }
         
         let hour = Int(Calendar.current.component(.hour, from: Date()))
         print("___________________")
@@ -122,6 +124,9 @@ class ScheduleTableViewController: UITableViewController {
         }else{
             cell.backgroundColor = UIColor(colorLiteralRed: 1, green: 1, blue: 1, alpha: 1)
         }
+        
+        self.save(name: thisshow.name, dj: thisshow.dj, time: thisshow.time,
+                  length: thisshow.len, fav: thisshow.favorited)
         
         return cell
     }
@@ -195,6 +200,42 @@ class ScheduleTableViewController: UITableViewController {
             
         }
         
+    }
+    
+    //MARK: Core Data Methods
+    
+    func save(name: String, dj: String, time: Int16, length: Int16, fav: Bool) {
+        
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        // 1
+        let managedContext = appDelegate.managedObjectContext
+        
+        // 2
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Show",
+                                       in: managedContext)!
+        
+        let show = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+        
+        // 3
+        show.setValue(name, forKeyPath: "name")
+        show.setValue(dj, forKeyPath: "dj")
+        show.setValue(time, forKeyPath: "time")
+        show.setValue(length, forKeyPath: "length")
+        show.setValue(fav, forKeyPath: "favorited")
+        
+        // 4
+        do {
+            try managedContext.save()
+            shows.append(show)
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
     
     //MARK: Private Methods
