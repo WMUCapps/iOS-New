@@ -17,6 +17,8 @@
 		B502C7C81EBAA880003699BB /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B502C7C71EBAA880003699BB /* ScheduleTableViewController.swift */; };
 		B502C7CA1EBAB1D7003699BB /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = B502C7C91EBAB1D7003699BB /* Show.swift */; };
 		B502C7CE1EBAC640003699BB /* ShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B502C7CD1EBAC640003699BB /* ShowTableViewCell.swift */; };
+		B549D22D1FD31CD600D8D7EE /* RadioTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B549D22B1FD31CD600D8D7EE /* RadioTest.xcdatamodeld */; };
+		B549D22F1FD31D3500D8D7EE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B549D22E1FD31D2A00D8D7EE /* CoreData.framework */; };
 		B54CF5611F22E922009DE627 /* WMUCCrawler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54CF5601F22E922009DE627 /* WMUCCrawler.swift */; };
 		B5C234C61E7A178F0069D9F4 /* Avenir-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5C234C21E7A178F0069D9F4 /* Avenir-Black.ttf */; };
 		B5C234C71E7A178F0069D9F4 /* Avenir-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5C234C31E7A178F0069D9F4 /* Avenir-Heavy.ttf */; };
@@ -40,6 +42,8 @@
 		B502C7C71EBAA880003699BB /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
 		B502C7C91EBAB1D7003699BB /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		B502C7CD1EBAC640003699BB /* ShowTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowTableViewCell.swift; sourceTree = "<group>"; };
+		B549D22C1FD31CD600D8D7EE /* RadioTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RadioTest.xcdatamodel; sourceTree = "<group>"; };
+		B549D22E1FD31D2A00D8D7EE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B54CF5601F22E922009DE627 /* WMUCCrawler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WMUCCrawler.swift; sourceTree = "<group>"; };
 		B59B0FB61EBA99B1006DB342 /* Avenir-Light 3.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Avenir-Light 3.ttf"; path = "../../../../../../../Desktop/Avenir-Light 3.ttf"; sourceTree = "<group>"; };
 		B5C234C21E7A178F0069D9F4 /* Avenir-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Avenir-Black.ttf"; sourceTree = "<group>"; };
@@ -57,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B549D22F1FD31D3500D8D7EE /* CoreData.framework in Frameworks */,
 				A6C9D344303BA98B4F9078DF /* Pods_RadioTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +104,7 @@
 				14076DDE1DA2E05F002C00B8 /* Assets.xcassets */,
 				14076DE01DA2E05F002C00B8 /* LaunchScreen.storyboard */,
 				14076DE31DA2E05F002C00B8 /* Info.plist */,
+				B549D22B1FD31CD600D8D7EE /* RadioTest.xcdatamodeld */,
 			);
 			path = RadioTest;
 			sourceTree = "<group>";
@@ -106,6 +112,7 @@
 		146BFCF51DAC1BFC008D4686 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B549D22E1FD31D2A00D8D7EE /* CoreData.framework */,
 				B5C234C21E7A178F0069D9F4 /* Avenir-Black.ttf */,
 				B5C234C31E7A178F0069D9F4 /* Avenir-Heavy.ttf */,
 				B5C234C41E7A178F0069D9F4 /* Avenir-Light.ttf */,
@@ -271,6 +278,7 @@
 				B5D1A8281F4616BA001441E1 /* Reachability.swift in Sources */,
 				B54CF5611F22E922009DE627 /* WMUCCrawler.swift in Sources */,
 				14076DEA1DA2E0EF002C00B8 /* RadioPlayer.swift in Sources */,
+				B549D22D1FD31CD600D8D7EE /* RadioTest.xcdatamodeld in Sources */,
 				B502C7C81EBAA880003699BB /* ScheduleTableViewController.swift in Sources */,
 				14076DDA1DA2E05F002C00B8 /* ViewController.swift in Sources */,
 				B5FAFB751F44A806002C8149 /* ScheduleView.swift in Sources */,
@@ -473,6 +481,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B549D22B1FD31CD600D8D7EE /* RadioTest.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B549D22C1FD31CD600D8D7EE /* RadioTest.xcdatamodel */,
+			);
+			currentVersion = B549D22C1FD31CD600D8D7EE /* RadioTest.xcdatamodel */;
+			path = RadioTest.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 14076DCC1DA2E05F002C00B8 /* Project object */;
 }
